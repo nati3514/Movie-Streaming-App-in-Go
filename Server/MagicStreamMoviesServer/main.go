@@ -4,18 +4,22 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"fmt"
+	controller "github.com/nati3514/Movie-Streaming-App-in-Go/Server/MagicStreamMoviesServer/controllers"
 )
 
 func main() {
  
 	router := gin.Default()
 
-	router.GET("/movies", func(c *gin.Context) {
+	router.GET("/hello", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Welcome to Magic Stream Movies Server!",
 		})
 	})
-	if err := router.Run(":8080"); err != nil {
+
+	router.GET("/movies", controller.GetMovies())
+
+	if err := router.Run(":3005"); err != nil {
 		fmt.Printf("Failed to start server: %v\n", err)
 	}
 }
